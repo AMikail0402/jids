@@ -11,6 +11,6 @@ public class App
     public static void main( String[] args )
     {
        
-        System.out.println( RulePatternGenerator.totalRule("TCP source-ip 192.168.56.1 dest-ip 192.168.56.103 source-port 62410 dest-port 22"));
+        System.out.println( RulePatternGenerator.totalRule("TCP source-ip any dest-ip 10.0.0.10 source-port any dest-port 8082"));
     }
 }

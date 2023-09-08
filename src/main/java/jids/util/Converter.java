@@ -65,13 +65,16 @@ public class Converter {
         int dec = Integer.parseInt(decNum);
         int temp;
         String hexNum ="";
+        if(dec==0){
+            hexNum = "0";
+        }
         char[] hex = {'0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F'};
         while(dec>0){
             temp=dec%16;
             hexNum=hex[temp]+hexNum;
             dec=dec/16;
         }
-
+        
         if(hexNum.length()==1){
 
             return "0"+hexNum;
