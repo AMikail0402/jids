@@ -16,7 +16,7 @@ public class Rule {
 
     }
 
-    public Rule generate(String rule){
+    public Rule patternGenerate(String rule){
         this.pattern = RulePatternGenerator.totalRule(rule);
         
         return this;
