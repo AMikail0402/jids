@@ -5,7 +5,7 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import jids.util.RuleGenerator;
+import jids.util.RulePatternGenerator;
 
 public class RulePatternGenerateTest {
     private String validRulePattern = "06(?:.|\\n){7}(c0(?:.|\\n)a8(?:.|\\n)38(?:.|\\n)01) (c0(?:.|\\n)a8(?:.|\\n)38(?:.|\\n)67) (f3 ca) (00 16)";
@@ -16,7 +16,7 @@ public class RulePatternGenerateTest {
      @Test
     public void tcpRulePatternGenerationConsistencyTest()
     {
-        assertEquals(validRulePattern, RuleGenerator.totalRule(validTestRule));
+        assertEquals(validRulePattern, RulePatternGenerator.totalRule(validTestRule));
     }
     
     

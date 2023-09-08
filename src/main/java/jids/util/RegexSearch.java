@@ -18,7 +18,6 @@ public class RegexSearch{
     };
   
 
-   
     public static String match(String input,String searchPattern){
         Pattern pattern = Pattern.compile(searchPattern);
         Matcher matcher = pattern.matcher(input);

@@ -1,4 +1,6 @@
-package jids.util;
+package jids;
+
+import jids.util.RulePatternGenerator;
 
 public class Rule {
 
@@ -12,6 +14,12 @@ public class Rule {
         this.msg = msg;
         this.cve = cve;
 
+    }
+
+    public Rule generate(String rule){
+        this.pattern = RulePatternGenerator.totalRule(rule);
+        
+        return this;
     }
 
     public String toString(){ 

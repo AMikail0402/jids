@@ -1,6 +1,7 @@
 package jids.enums;
 
 public enum Patterns {
+    
     SSH("00 16.{25}80 02|01 bb.{31}50 18"),
     MODE("TCP|HTTP"),
     SRCIP("source-ip (\\d{1,3}[.]\\d{1,3}[.]\\d{1,3}[.]\\d{1,3})"),

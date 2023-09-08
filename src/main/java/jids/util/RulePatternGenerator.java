@@ -6,25 +6,25 @@ import java.util.Scanner;
 
 import jids.enums.Patterns;
 
-public class RuleGenerator {
+public class RulePatternGenerator {
     
  
     public static void main(String[] args) throws FileNotFoundException{
-        String rule = RuleGenerator.totalRule("HTTP source-ip 192.168.178.141 dest-ip 192.168.178.141 source-port 62070 dest-port 80");
+        String rule = RulePatternGenerator.totalRule("HTTP source-ip 192.168.178.141 dest-ip 192.168.178.141 source-port 62070 dest-port 80");
         System.out.println(rule);
      
     }
 
     public static String totalRule(String rule){
-    String mode = RuleGenerator.mode(rule);
+    String mode = RulePatternGenerator.mode(rule);
  
-     String modePattern = RuleGenerator.modePattern(mode);
+     String modePattern = RulePatternGenerator.modePattern(mode);
 
-     String srcIp = RuleGenerator.sourceIpPattern(rule);    
-     String dstIp = RuleGenerator.destIpPattern(rule); 
+     String srcIp = RulePatternGenerator.sourceIpPattern(rule);    
+     String dstIp = RulePatternGenerator.destIpPattern(rule); 
 
-     String srcPort = RuleGenerator.sourcePortPattern(rule);
-     String dstPort = RuleGenerator.destPortPattern(rule);
+     String srcPort = RulePatternGenerator.sourcePortPattern(rule);
+     String dstPort = RulePatternGenerator.destPortPattern(rule);
      String totalrule = "";
 
     if(mode.equals("TCP")){
