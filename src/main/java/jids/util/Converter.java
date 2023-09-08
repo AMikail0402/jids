@@ -6,7 +6,6 @@ import java.util.regex.Pattern;
 public class Converter {
 
    
-
     public static String convertIpToHexRule(String ip){
         String numPattern = "(\\d{1,3}).(\\d{1,3}).(\\d{1,3}).(\\d{1,3})";
         Pattern pattern = Pattern.compile(numPattern);

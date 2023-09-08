@@ -18,9 +18,14 @@ import jids.util.MessageExtractor;
  */
 public class App 
 {
-    public static void main( String[] args ) throws FileNotFoundException, UnsupportedEncodingException, IOException
+    static String startUpLogo = "     //   //  //////    /////\r\n" + //
+            "    //   //  //   //   //     \r\n" + //
+            "   //   //  //   //      //  \r\n" + //
+            "////   //  //////    /////";
+    public static void main( String[] args ) throws FileNotFoundException, UnsupportedEncodingException, IOException, InterruptedException
     {
-        FileInputStream fis = new FileInputStream("rules.conf");
+       startUpSequence(startUpLogo);
+     /*   FileInputStream fis = new FileInputStream("rules.conf");
         InputStreamReader isr = new InputStreamReader(fis, "UTF-8");
         BufferedReader br = new BufferedReader(isr);
         Object[] strArray = br.lines().toArray();
@@ -29,7 +34,17 @@ public class App
             System.out.println(x.toString());
             System.out.println(MessageExtractor.getMessage(x.toString()));
         }
-        
+
        // System.out.println( RulePatternGenerator.totalRule("TCP source-ip any dest-ip 10.0.0.10 source-port any dest-port 8082"));
+     */
+    }
+
+    public static void startUpSequence(String logo) throws InterruptedException{
+      char[] chars = logo.toCharArray();
+      for(char x : chars){
+        System.out.print(x);
+        Thread.sleep(10);
+      }
+        
     }
 }
