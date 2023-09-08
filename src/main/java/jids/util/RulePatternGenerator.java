@@ -133,10 +133,5 @@ public class RulePatternGenerator {
      return "("+match+") ";
     }
 
-    public static String ruleGen(String input){
-         System.out.println("Source-IP: "+sourceIpPattern(input));
-
-        return "";
-    }
 
 }

@@ -12,7 +12,7 @@ public class MessageExtractor{
         }
         
         public static String getMessage(String rule){
-                System.out.println(rule);
+            
                 String messagePattern ="msg:'(.*)'";
                 Pattern pattern = Pattern.compile(messagePattern);
                 Matcher matcher = pattern.matcher(rule);
