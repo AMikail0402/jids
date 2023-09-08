@@ -8,7 +8,7 @@ public class Rule {
     String msg;
     String cve;
 
-    Rule(String pattern,String msg, String cve){
+    public Rule(String pattern,String msg, String cve){
 
         this.pattern = pattern;
         this.msg = msg;

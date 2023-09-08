@@ -4,10 +4,8 @@ import static org.junit.Assert.assertEquals;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
 
 import org.junit.Test;
 
@@ -26,7 +24,7 @@ public class MessageExtractionTest {
     }
 
     @Test
-    public void readOutOfFile() throws IOException{
+    public void readMsgOutOfFile() throws IOException{
         FileInputStream fis = new FileInputStream("./src/test/java/jids/FunctionTest/test.conf");
         InputStreamReader isr = new InputStreamReader(fis, "UTF-8");
         BufferedReader br = new BufferedReader(isr);
