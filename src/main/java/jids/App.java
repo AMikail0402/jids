@@ -8,13 +8,13 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 import org.apache.logging.log4j.*;
+
 /**
  * Hello world!
  *
  */
 public class App 
 { 
-    static Logger logger = LogManager.getLogger(App.class.getName());
 
     static String startUpLogo = "     //   //  //////    /////\r\n" + //
             "    //   //  //   //   //     \r\n" + //
@@ -26,7 +26,12 @@ public class App
       LocalDateTime dateTime = LocalDateTime.now();
       DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy-HH-mm-ss");
       String formattedTime = dateTime.format(dateTimeFormatter);
+      System.setProperty("log4j.configurationFile","resources/log4j2.xml");
+      
+      Logger logger = LogManager.getLogger(App.class.getName());
+   
       logger.info("Logging");
+      logger.fatal("Error");
    
     
 
