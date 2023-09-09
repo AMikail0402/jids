@@ -2,7 +2,7 @@
 <Configuration status="INFO">
     <Appenders>
         <!-- Konfiguration eines Datei-Appenders -->
-        <File name="LogFile" fileName="${date:yyyy-MM-dd-HH-mm-ss}.log">
+        <File name="LogFile" fileName="${date:dd-MM-yyyy-HH-mm-ss}.log">
             <PatternLayout pattern="%d{HH:mm:ss.SSS} - %msg%n" charset="UTF-8"/>
         </File>
     </Appenders>
