@@ -13,6 +13,7 @@ import org.apache.logging.log4j.*;
  * Hello world!
  *
  */
+
 public class App 
 { 
 
@@ -30,12 +31,12 @@ public class App
       
       Logger logger = LogManager.getLogger(App.class.getName());
    
-      logger.info("Logging erfolgreich");
+      logger.info("\nEine größere Bedrohung\nAb in die nächste Zeile");
       logger.fatal("Error");
    
     
 
-     //startUpSequence(startUpLogo);
+      startUpSequence(startUpLogo);
      /*   FileInputStream fis = new FileInputStream("rules.conf");
         InputStreamReader isr = new InputStreamReader(fis, "UTF-8");
         BufferedReader br = new BufferedReader(isr);
