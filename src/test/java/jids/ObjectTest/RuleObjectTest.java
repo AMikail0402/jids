@@ -10,8 +10,8 @@ public class RuleObjectTest {
     
     @Test
     public void ruleToStringTest(){
-        Rule rule1 = new Rule("msg","pattern","cve");
-        assertEquals("msg | pattern | cve",rule1.toString());
+        Rule rule1 = new Rule("msg","pattern","cve","1");
+        assertEquals("msg | pattern | cve | 1",rule1.toString());
     }
     
 }

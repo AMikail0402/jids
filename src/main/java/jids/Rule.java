@@ -7,12 +7,14 @@ public class Rule {
     String pattern;
     String msg;
     String cve;
+    String id;
 
-    public Rule(String pattern,String msg, String cve){
+    public Rule(String pattern,String msg, String cve, String id){
 
         this.pattern = pattern;
         this.msg = msg;
         this.cve = cve;
+        this.id = id;
 
     }
 
@@ -23,6 +25,6 @@ public class Rule {
     }
 
     public String toString(){ 
-        return pattern+" | "+msg+" | "+cve;  
+        return pattern+" | "+msg+" | "+cve+" | "+id;  
        }  
 }
