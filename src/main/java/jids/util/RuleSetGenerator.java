@@ -1,5 +1,7 @@
 package jids.util;
 
+import java.io.BufferedReader;
+
 import jids.Rule;
 
 public class RuleSetGenerator {
@@ -9,7 +11,7 @@ public class RuleSetGenerator {
                 System.out.println(ruleObject.toString());
             }
         
-            
+
 
         public static Rule createRule(String fullRule){
                 String pattern = RulePatternGenerator.totalRule(fullRule);
@@ -18,5 +20,9 @@ public class RuleSetGenerator {
                 String id = IdExtractor.getId(fullRule);
                 Rule rule = new Rule(pattern, msg, cve, id);
                 return rule;
+        }
+
+        public static Rule[] createRuleSet(BufferedReader br){
+            return null;
         }
 }
