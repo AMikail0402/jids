@@ -24,19 +24,18 @@ public class App
 
     public static void main( String[] args ) throws FileNotFoundException, UnsupportedEncodingException, IOException, InterruptedException
     {
+      startUpSequence(startUpLogo);
+     
       LocalDateTime dateTime = LocalDateTime.now();
       DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy-HH-mm-ss");
       String formattedTime = dateTime.format(dateTimeFormatter);
       System.setProperty("log4j.configurationFile","resources/log4j2.xml");
       
       Logger logger = LogManager.getLogger(App.class.getName());
-   
-      logger.info("\nEine größere Bedrohung\nAb in die nächste Zeile");
-      logger.fatal("Error");
-   
-    
 
-      startUpSequence(startUpLogo);
+      logger.info("\nEine größere Bedrohung\nAb in die nächste Zeile");
+      logger.info("\nnormaler Betrieb");
+  
      /*   FileInputStream fis = new FileInputStream("rules.conf");
         InputStreamReader isr = new InputStreamReader(fis, "UTF-8");
         BufferedReader br = new BufferedReader(isr);
@@ -59,6 +58,6 @@ public class App
         System.out.print(x);
         Thread.sleep(10);
       }
-        
+        System.out.println();
     }
 }

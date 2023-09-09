@@ -9,7 +9,6 @@ import java.io.InputStreamReader;
 
 import org.junit.Test;
 
-import jids.util.CveExtractor;
 import jids.util.IdExtractor;
 
 
@@ -18,7 +17,7 @@ public class IdExtractionTest {
    
     @Test
     public void cveTest(){
-        assertEquals("1",IdExtractor.getCve(ruleOne));
+        assertEquals("1",IdExtractor.getId(ruleOne));
     }
 
     @Test
@@ -28,9 +27,9 @@ public class IdExtractionTest {
         InputStreamReader isr = new InputStreamReader(fis, "UTF-8");
         BufferedReader br = new BufferedReader(isr);
         String lineOne = br.readLine();
-        assertEquals("1", IdExtractor.getCve(lineOne));
+        assertEquals("1", IdExtractor.getId(lineOne));
         String lineTwo = br.readLine();
-        assertEquals("2", IdExtractor.getCve(lineTwo));
+        assertEquals("2", IdExtractor.getId(lineTwo));
     
     }
 
