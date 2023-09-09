@@ -1,0 +1,9 @@
+digraph "jids:jids:jar:1.0-SNAPSHOT" { 
+	"jids:jids:jar:1.0-SNAPSHOT" -> "org.apache.logging.log4j:log4j-core:jar:2.20.0:compile" ; 
+	"jids:jids:jar:1.0-SNAPSHOT" -> "org.pcap4j:pcap4j-core:jar:1.8.2:compile" ; 
+	"jids:jids:jar:1.0-SNAPSHOT" -> "junit:junit:jar:4.11:test" ; 
+	"org.apache.logging.log4j:log4j-core:jar:2.20.0:compile" -> "org.apache.logging.log4j:log4j-api:jar:2.20.0:compile" ; 
+	"org.pcap4j:pcap4j-core:jar:1.8.2:compile" -> "net.java.dev.jna:jna:jar:5.3.1:compile" ; 
+	"org.pcap4j:pcap4j-core:jar:1.8.2:compile" -> "org.slf4j:slf4j-api:jar:1.7.26:compile" ; 
+	"junit:junit:jar:4.11:test" -> "org.hamcrest:hamcrest-core:jar:1.3:test" ; 
+ } 

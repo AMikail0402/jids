@@ -21,7 +21,6 @@ public class DecToHexTest {
        @Test
     public void zeroTest(){
         assertEquals("00",Converter.decToHex("0"));
-        
     }
 
 }
