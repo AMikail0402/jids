@@ -30,7 +30,7 @@ public class App
       
       Logger logger = LogManager.getLogger(App.class.getName());
    
-      logger.info("Logging");
+      logger.info("Logging erfolgreich");
       logger.fatal("Error");
    
     
