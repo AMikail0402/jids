@@ -10,6 +10,8 @@ import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.util.Scanner;
 
+import org.apache.logging.log4j.*;
+
 import jids.util.MessageExtractor;
 
 /**
@@ -17,14 +19,18 @@ import jids.util.MessageExtractor;
  *
  */
 public class App 
-{
+{ 
+    static Logger logger = LogManager.getLogger(App.class.getName());
+
     static String startUpLogo = "     //   //  //////    /////\r\n" + //
             "    //   //  //   //   //     \r\n" + //
             "   //   //  //   //      //  \r\n" + //
             "////   //  //////    /////";
+
     public static void main( String[] args ) throws FileNotFoundException, UnsupportedEncodingException, IOException, InterruptedException
     {
-       startUpSequence(startUpLogo);
+
+     // startUpSequence(startUpLogo);
      /*   FileInputStream fis = new FileInputStream("rules.conf");
         InputStreamReader isr = new InputStreamReader(fis, "UTF-8");
         BufferedReader br = new BufferedReader(isr);
@@ -37,6 +43,11 @@ public class App
 
        // System.out.println( RulePatternGenerator.totalRule("TCP source-ip any dest-ip 10.0.0.10 source-port any dest-port 8082"));
      */
+      
+     System.out.println("Sysout");
+    logger.info("Hello world");
+
+   
     }
 
     public static void startUpSequence(String logo) throws InterruptedException{
