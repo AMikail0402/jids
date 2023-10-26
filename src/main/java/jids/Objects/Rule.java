@@ -1,4 +1,4 @@
-package jids;
+package jids.Objects;
 
 import jids.util.RulePatternGenerator;
 

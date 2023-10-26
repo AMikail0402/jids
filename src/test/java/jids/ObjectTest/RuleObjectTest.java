@@ -4,7 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import jids.Rule;
+import jids.Objects.Rule;
 
 public class RuleObjectTest {
     
