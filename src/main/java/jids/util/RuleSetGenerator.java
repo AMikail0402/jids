@@ -2,22 +2,15 @@ package jids.util;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
 import java.util.Stack;
 
 import jids.Objects.Rule;
 
 public class RuleSetGenerator {
         public static void main(String[] args) throws IOException{
-                // String rulexample = "TCP source-ip any dest-ip 10.0.0.10 source-port any dest-port 8082 (msg:'grün'; cve:'CVE-2023-1237'; id:'1')";
-                // String ruleSetExample = "TCP source-ip any dest-ip 10.0.0.10 source-port any dest-port 8082 (msg:'grün'; cve:'CVE-2023-1237'; id:'1')\r\n" + //
-                //                 "TCP source-ip any dest-ip 10.0.0.10 source-port any dest-port 8082 (msg:'blau'; cve:'CVE-2023-1239'; id:'2')\r\n" + //
-                //                 "";
-                // Rule ruleObject = createRule(rulexample);
-                // System.out.println(ruleSetExample);
+
                 FileInputStream fis = new FileInputStream("./jids/rules.conf");
                 InputStreamReader isr = new InputStreamReader(fis, "UTF-8");
                 BufferedReader br = new BufferedReader(isr);

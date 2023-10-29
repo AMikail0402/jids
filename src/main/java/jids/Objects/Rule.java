@@ -4,10 +4,10 @@ import jids.util.RulePatternGenerator;
 
 public class Rule {
 
-    String pattern;
-    String msg;
-    String cve;
-    String id;
+    private String pattern;
+    private String msg;
+    private String cve;
+    private String id;
 
     public Rule(String pattern,String msg, String cve, String id){
 
@@ -16,6 +16,23 @@ public class Rule {
         this.cve = cve;
         this.id = id;
 
+    }
+
+    public String getPattern(){
+        return this.pattern;
+    }
+
+    public String getMsg(){
+        return this.msg;
+    }
+
+    
+    public String getCve(){
+        return this.cve;
+    }
+
+    public String getId(){
+        return this.id;
     }
 
     public Rule patternGenerate(String rule){
