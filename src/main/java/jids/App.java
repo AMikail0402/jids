@@ -9,6 +9,8 @@ import java.time.format.DateTimeFormatter;
 
 import org.apache.logging.log4j.*;
 
+import api.DbCheck;
+
 /**
  * Hello world!
  *
@@ -29,13 +31,14 @@ public class App
       LocalDateTime dateTime = LocalDateTime.now();
       DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy-HH-mm-ss");
       String formattedTime = dateTime.format(dateTimeFormatter);
-      System.setProperty("log4j.configurationFile","resources/log4j2.xml");
+      System.setProperty("log4j.configurationFile","./jids/resources/log4j2.xml");
       
       Logger logger = LogManager.getLogger(App.class.getName());
 
-      logger.info("\nEine größere Bedrohung\nAb in die nächste Zeile");
-      logger.info("\nnormaler Betrieb");
-  
+      logger.info("\nEine größere Bedrohung");
+      logger.info("\normaler Betrieb mit Umbruch");
+      DbCheck.isAvailable();
+      
      /*   FileInputStream fis = new FileInputStream("rules.conf");
         InputStreamReader isr = new InputStreamReader(fis, "UTF-8");
         BufferedReader br = new BufferedReader(isr);
