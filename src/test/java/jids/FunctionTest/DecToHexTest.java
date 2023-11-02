@@ -1,26 +1,27 @@
 package jids.FunctionTest;
 
-import static org.junit.Assert.assertEquals;
 
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Assertions;
 
 import jids.util.Converter;
 
 public class DecToHexTest {
     
-    @Test
+   @org.junit.jupiter.api.Test
     public void singleDigitTest(){
-        assertEquals("01",Converter.decToHex("1"));
-        assertEquals("07",Converter.decToHex("7"));
+        Assertions.assertEquals("01",Converter.decToHex("1"));
+        Assertions.assertEquals("07",Converter.decToHex("7"));
     }
-     @Test
+     @org.junit.jupiter.api.Test
     public void doubleDigitTest(){
-        assertEquals("0A",Converter.decToHex("10"));
-        assertEquals("15",Converter.decToHex("21"));
+        Assertions.assertEquals("0A",Converter.decToHex("10"));
+        Assertions.assertEquals("15",Converter.decToHex("21"));
     }
-       @Test
+    @org.junit.jupiter.api.Test
     public void zeroTest(){
-        assertEquals("00",Converter.decToHex("0"));
+        Assertions.assertEquals("00",Converter.decToHex("0"));
     }
 
 }

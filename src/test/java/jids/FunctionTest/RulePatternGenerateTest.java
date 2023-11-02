@@ -1,8 +1,10 @@
 package jids.FunctionTest;
 
-import static org.junit.Assert.assertEquals;
 
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import jids.util.RulePatternGenerator;
 
@@ -13,15 +15,15 @@ public class RulePatternGenerateTest {
     private String zeroPattern = "06(?:.|\\n){7}((?:.|\\n){12})(0a(?:.|\\n)00(?:.|\\n)00(?:.|\\n)0a) ((?:.|\\n){6})(1f 92)";
     private String zeroRule = "TCP source-ip any dest-ip 10.0.0.10 source-port any dest-port 8082";
 
-     @Test
+    @Test
     public void tcpRulePatternGenerationConsistencyTest()
     {
-        assertEquals(validRulePattern1, RulePatternGenerator.totalRule(validTestRule1));
+        Assertions.assertEquals(validRulePattern1, RulePatternGenerator.totalRule(validTestRule1));
     }
       @Test
     public void zeroConsistencyTest()
     {
-        assertEquals(zeroPattern, RulePatternGenerator.totalRule(zeroRule));
+        Assertions.assertEquals(zeroPattern, RulePatternGenerator.totalRule(zeroRule));
     }
     
 }

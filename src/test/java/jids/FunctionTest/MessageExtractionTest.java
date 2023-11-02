@@ -1,13 +1,14 @@
 package jids.FunctionTest;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import jids.util.MessageExtractor;
 
@@ -18,9 +19,9 @@ public class MessageExtractionTest {
 
     @Test
     public void specialCharacterTest(){
-        assertEquals("Das Gras ist grün",MessageExtractor.getMessage(ruleOne));
-        assertEquals("Das Gras wächst schnell",MessageExtractor.getMessage(ruleTwo));
-        assertEquals("Das Gras ist größer als vorher",MessageExtractor.getMessage(ruleThree));
+        Assertions.assertEquals("Das Gras ist grün",MessageExtractor.getMessage(ruleOne));
+        Assertions.assertEquals("Das Gras wächst schnell",MessageExtractor.getMessage(ruleTwo));
+        Assertions.assertEquals("Das Gras ist größer als vorher",MessageExtractor.getMessage(ruleThree));
     }
 
     @Test
@@ -29,9 +30,9 @@ public class MessageExtractionTest {
         InputStreamReader isr = new InputStreamReader(fis, "UTF-8");
         BufferedReader br = new BufferedReader(isr);
         String lineOne = br.readLine();
-        assertEquals("grün", MessageExtractor.getMessage(lineOne));
+        Assertions.assertEquals("grün", MessageExtractor.getMessage(lineOne));
         String lineTwo = br.readLine();
-        assertEquals("msg2", MessageExtractor.getMessage(lineTwo));
+        Assertions.assertEquals("msg2", MessageExtractor.getMessage(lineTwo));
     }
 
 }

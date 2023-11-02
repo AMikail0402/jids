@@ -22,17 +22,34 @@ public class Rule {
         return this.pattern;
     }
 
+    public void setPattern(String pattern){
+        this.pattern = pattern;
+    }
+
     public String getMsg(){
         return this.msg;
     }
+
+    public void setMsg(String msg){
+        this.msg = msg;
+    }
+
 
     
     public String getCve(){
         return this.cve;
     }
+     
+    public void setCve(String cve){
+        this.cve = cve;
+    }
+
 
     public String getId(){
         return this.id;
+    }
+     public void setId(String id){
+        this.id = id;
     }
 
     public Rule patternGenerate(String rule){

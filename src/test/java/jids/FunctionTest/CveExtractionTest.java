@@ -1,13 +1,16 @@
 package jids.FunctionTest;
 
-import static org.junit.Assert.assertEquals;
+
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import jids.util.CveExtractor;
 
@@ -27,9 +30,9 @@ public class CveExtractionTest {
         InputStreamReader isr = new InputStreamReader(fis, "UTF-8");
         BufferedReader br = new BufferedReader(isr);
         String lineOne = br.readLine();
-        assertEquals("CVE-2023-1237", CveExtractor.getCve(lineOne));
+        Assertions.assertEquals("CVE-2023-1237", CveExtractor.getCve(lineOne));
         String lineTwo = br.readLine();
-        assertEquals("CVE-2022-1235", CveExtractor.getCve(lineTwo));
+        Assertions.assertEquals("CVE-2022-1235", CveExtractor.getCve(lineTwo));
     
     }
 

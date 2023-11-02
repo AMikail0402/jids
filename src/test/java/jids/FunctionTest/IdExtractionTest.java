@@ -1,13 +1,14 @@
 package jids.FunctionTest;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import jids.util.IdExtractor;
 
@@ -17,7 +18,7 @@ public class IdExtractionTest {
    
     @Test
     public void cveTest(){
-        assertEquals("1",IdExtractor.getId(ruleOne));
+        Assertions.assertEquals("1",IdExtractor.getId(ruleOne));
     }
 
     @Test
@@ -27,9 +28,9 @@ public class IdExtractionTest {
         InputStreamReader isr = new InputStreamReader(fis, "UTF-8");
         BufferedReader br = new BufferedReader(isr);
         String lineOne = br.readLine();
-        assertEquals("1", IdExtractor.getId(lineOne));
+        Assertions.assertEquals("1", IdExtractor.getId(lineOne));
         String lineTwo = br.readLine();
-        assertEquals("2", IdExtractor.getId(lineTwo));
+        Assertions.assertEquals("2", IdExtractor.getId(lineTwo));
     
     }
 
