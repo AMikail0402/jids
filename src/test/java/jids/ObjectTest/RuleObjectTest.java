@@ -1,7 +1,6 @@
 package jids.ObjectTest;
 
 import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
 
 import org.junit.jupiter.api.Assertions;
 
