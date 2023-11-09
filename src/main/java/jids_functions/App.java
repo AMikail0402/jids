@@ -1,4 +1,4 @@
-package jids;
+package jids_functions;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -8,6 +8,8 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 import org.apache.logging.log4j.*;
+import org.pcap4j.core.NotOpenException;
+import org.pcap4j.core.PcapNativeException;
 
 import api.DbCheck;
 
@@ -24,34 +26,21 @@ public class App
             "   //   //  //   //      //  \r\n" + //
             "////   //  //////    /////";
 
-    public static void main( String[] args ) throws FileNotFoundException, UnsupportedEncodingException, IOException, InterruptedException
+    public static void main( String[] args ) throws FileNotFoundException, UnsupportedEncodingException, IOException, InterruptedException, PcapNativeException, NotOpenException
     {
       startUpSequence(startUpLogo);
      
       LocalDateTime dateTime = LocalDateTime.now();
       DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy-HH-mm-ss");
       String formattedTime = dateTime.format(dateTimeFormatter);
-      System.setProperty("log4j.configurationFile","./jids/resources/log4j2.xml");
+      System.setProperty("log4j.configurationFile","./resources/log4j2.xml");
       
       Logger logger = LogManager.getLogger(App.class.getName());
 
       logger.info("\nEine größere Bedrohung");
       logger.info("\normaler Betrieb mit Umbruch");
       DbCheck.isAvailable();
-      
-     /*   FileInputStream fis = new FileInputStream("rules.conf");
-        InputStreamReader isr = new InputStreamReader(fis, "UTF-8");
-        BufferedReader br = new BufferedReader(isr);
-        Object[] strArray = br.lines().toArray();
-
-        for(Object x : strArray){
-            System.out.println(x.toString());
-            System.out.println(MessageExtractor.getMessage(x.toString()));
-        }
-
-       // System.out.println( RulePatternGenerator.totalRule("TCP source-ip any dest-ip 10.0.0.10 source-port any dest-port 8082"));
-     */
-    
+      UserLoop.startUp();
    
     }
 
