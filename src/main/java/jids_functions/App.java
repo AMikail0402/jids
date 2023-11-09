@@ -8,8 +8,6 @@ import java.io.UnsupportedEncodingException;
 import org.pcap4j.core.NotOpenException;
 import org.pcap4j.core.PcapNativeException;
 
-import api.DbCheck;
-
 /**
  * Hello world!
  *
