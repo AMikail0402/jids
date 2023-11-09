@@ -4,8 +4,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.Date;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.pcap4j.core.NotOpenException;
 import org.pcap4j.core.PacketListener;
 import org.pcap4j.core.PcapHandle;
@@ -25,12 +23,12 @@ import jids.util.RuleSetGenerator;
 
 public class OnlineInquiry{
 
-       static Logger logger = LogManager.getLogger();
+      
 
        public static void onlineAnalysis(BufferedReader br, boolean db) throws PcapNativeException, NotOpenException, IOException{   
 
             System.setProperty("log4j.configurationFile","./resources/log4j2.xml");
-            logger.info("Commencing sniffing");
+
 
             PcapNetworkInterface device = getNetworkDevice();
             System.out.println("You chose: " + device);

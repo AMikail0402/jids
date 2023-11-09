@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.Date;
 
-import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.pcap4j.core.NotOpenException;
 import org.pcap4j.core.PacketListener;
@@ -24,12 +23,12 @@ import jids.util.RuleSetGenerator;
 
 public class OfflineInquiry extends Thread {
 
-        static Logger logger = LogManager.getLogger();
+
 
        public static void offlineAnalysis(BufferedReader br) throws PcapNativeException, NotOpenException, IOException{   
-            Long begin = new Date().getTime();
+            
+        Long begin = new Date().getTime();
             System.setProperty("log4j.configurationFile","./resources/log4j2.xml");
-            logger.info("Commencing sniffing");
 
          
             PcapHandle handle;
