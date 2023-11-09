@@ -1,7 +1,11 @@
 package jids_functions;
 
 import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.IOException;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.pcap4j.core.NotOpenException;
 import org.pcap4j.core.PacketListener;
 import org.pcap4j.core.PcapHandle;
@@ -20,10 +24,13 @@ import jids.util.RuleSetGenerator;
 
 public class OnlineInquiry{
 
-
+        static Logger logger = LogManager.getLogger();
 
        public static void onlineAnalysis(BufferedReader br) throws PcapNativeException, NotOpenException, IOException{   
-           PcapNetworkInterface device = getNetworkDevice();
+            System.setProperty("log4j.configurationFile","./resources/log4j2.xml");
+            FileInputStream isAvailable = new FileInputStream("./resources/log4j2.xml");
+            logger.info("Commencing sniffing");
+            PcapNetworkInterface device = getNetworkDevice();
             System.out.println("You chose: " + device);
             if(device == null ){
                 System.out.println("No device chosen");
@@ -38,7 +45,7 @@ public class OnlineInquiry{
             
             //Create Rule Array 
             final Rule[] ruleSet = RuleSetGenerator.createRuleSet(br);
-          // logger.info("Commencing Sniffing");
+
             // Create a listener that defines what to do with the received packets
             PacketListener listener = new PacketListener() {
 

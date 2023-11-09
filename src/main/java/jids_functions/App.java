@@ -1,13 +1,16 @@
 package jids_functions;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-
+import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 import org.apache.logging.log4j.*;
+import org.apache.logging.log4j.core.appender.FileAppender;
 import org.pcap4j.core.NotOpenException;
 import org.pcap4j.core.PcapNativeException;
 
@@ -20,7 +23,6 @@ import api.DbCheck;
 
 public class App 
 { 
-    static Logger logger = LogManager.getLogger(App.class.getName());
     static String startUpLogo = "     //   //  //////    /////\r\n" + //
             "    //   //  //   //   //     \r\n" + //
             "   //   //  //   //      //  \r\n" + //
@@ -33,14 +35,9 @@ public class App
       LocalDateTime dateTime = LocalDateTime.now();
       DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy-HH-mm-ss");
       String formattedTime = dateTime.format(dateTimeFormatter);
-      System.setProperty("log4j.configurationFile","./resources/log4j2.xml");
-      
-     
-
-      logger.info("\nEine größere Bedrohung");
-      logger.info("\normaler Betrieb mit Umbruch");
       DbCheck.isAvailable();
       UserLoop.startUp();
+    
     }
 
     public static void startUpSequence(String logo) throws InterruptedException{
