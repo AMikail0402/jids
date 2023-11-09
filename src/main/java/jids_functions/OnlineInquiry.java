@@ -1,12 +1,11 @@
 package jids_functions;
 
 import java.io.BufferedReader;
-import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.Date;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.pcap4j.Pcap4jPropertiesLoader;
 import org.pcap4j.core.NotOpenException;
 import org.pcap4j.core.PacketListener;
 import org.pcap4j.core.PcapHandle;
@@ -18,6 +17,7 @@ import org.pcap4j.core.PcapPacket;
 import org.pcap4j.core.PcapStat;
 import org.pcap4j.util.NifSelector;
 
+import api.DbPush;
 import jids.Objects.Rule;
 import jids.util.RegexSearch;
 import jids.util.RuleSetGenerator;
@@ -29,6 +29,7 @@ public class OnlineInquiry{
         static Logger logger = LogManager.getLogger();
 
        public static void onlineAnalysis(BufferedReader br) throws PcapNativeException, NotOpenException, IOException{   
+
             System.setProperty("log4j.configurationFile","./resources/log4j2.xml");
             logger.info("Commencing sniffing");
 
@@ -58,11 +59,14 @@ public class OnlineInquiry{
                     IpV4Packet ipacket = packet.get(IpV4Packet.class);
                    for(Rule x : ruleSet){
                         String pattern = x.getPattern();
-                        boolean keyword = RegexSearch.search(ipacket.toHexString(), pattern);
+                        boolean keyword = RegexSearch.search(packet.toHexString(), pattern);
                         if(keyword == true){
-                           // logger.info("Verstoß: "+x.getMsg());
-                           System.out.println("Ursprungsadresse: "+ipacket.getHeader().getSrcAddr());
-                            System.out.println("Match!\n\n");
+                         System.out.println("Match!\n\n");
+                         try {
+                            DbPush.push(x.getCve(), x.getMsg(),new Date().toString(), ipacket.getHeader().getSrcAddr().toString());
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                         }
                         
                     }
@@ -74,7 +78,7 @@ public class OnlineInquiry{
 
             try {
                 int maxPackets = (int)(Math.pow(10, 5));
-                handle.loop(20, listener);
+                handle.loop(maxPackets, listener);
             } 
             catch (InterruptedException e) {
                     e.printStackTrace();
