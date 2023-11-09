@@ -20,7 +20,7 @@ import api.DbCheck;
 
 public class App 
 { 
-
+    static Logger logger = LogManager.getLogger(App.class.getName());
     static String startUpLogo = "     //   //  //////    /////\r\n" + //
             "    //   //  //   //   //     \r\n" + //
             "   //   //  //   //      //  \r\n" + //
@@ -35,13 +35,12 @@ public class App
       String formattedTime = dateTime.format(dateTimeFormatter);
       System.setProperty("log4j.configurationFile","./resources/log4j2.xml");
       
-      Logger logger = LogManager.getLogger(App.class.getName());
+     
 
       logger.info("\nEine größere Bedrohung");
       logger.info("\normaler Betrieb mit Umbruch");
       DbCheck.isAvailable();
       UserLoop.startUp();
-   
     }
 
     public static void startUpSequence(String logo) throws InterruptedException{

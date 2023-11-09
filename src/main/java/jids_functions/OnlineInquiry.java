@@ -2,7 +2,6 @@ package jids_functions;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-
 import org.pcap4j.core.NotOpenException;
 import org.pcap4j.core.PacketListener;
 import org.pcap4j.core.PcapHandle;
@@ -21,6 +20,8 @@ import jids.util.RuleSetGenerator;
 
 public class OnlineInquiry{
 
+
+
        public static void onlineAnalysis(BufferedReader br) throws PcapNativeException, NotOpenException, IOException{   
            PcapNetworkInterface device = getNetworkDevice();
             System.out.println("You chose: " + device);
@@ -37,7 +38,7 @@ public class OnlineInquiry{
             
             //Create Rule Array 
             final Rule[] ruleSet = RuleSetGenerator.createRuleSet(br);
-           
+          // logger.info("Commencing Sniffing");
             // Create a listener that defines what to do with the received packets
             PacketListener listener = new PacketListener() {
 
@@ -48,8 +49,10 @@ public class OnlineInquiry{
                         String pattern = x.getPattern();
                         boolean keyword = RegexSearch.search(packet.toHexString(), pattern);
                         if(keyword == true){
+                           // logger.info("Verstoß: "+x.getMsg());
                             System.out.println("Match!\n\n");
                         }
+                        
                     }
                     
                 }
@@ -59,7 +62,7 @@ public class OnlineInquiry{
 
             try {
                 int maxPackets = (int)(Math.pow(10, 5));
-                handle.loop(maxPackets, listener);
+                handle.loop(20, listener);
             } 
             catch (InterruptedException e) {
                     e.printStackTrace();
