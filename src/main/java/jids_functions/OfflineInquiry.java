@@ -9,43 +9,38 @@ import org.apache.logging.log4j.Logger;
 import org.pcap4j.core.NotOpenException;
 import org.pcap4j.core.PacketListener;
 import org.pcap4j.core.PcapHandle;
+import org.pcap4j.core.PcapHandle.TimestampPrecision;
 import org.pcap4j.core.PcapNativeException;
 import org.pcap4j.core.PcapNetworkInterface;
-import org.pcap4j.core.PcapNetworkInterface.PromiscuousMode;
-import org.pcap4j.packet.IpV4Packet;
 import org.pcap4j.core.PcapPacket;
+import org.pcap4j.core.Pcaps;
 import org.pcap4j.util.NifSelector;
 
-import api.DbPush;
 import jids.Objects.Rule;
 import jids.util.RegexSearch;
 import jids.util.RuleSetGenerator;
 
 
 
-public class OnlineInquiry{
+public class OfflineInquiry extends Thread {
 
-       static Logger logger = LogManager.getLogger();
+        static Logger logger = LogManager.getLogger();
 
-       public static void onlineAnalysis(BufferedReader br, boolean db) throws PcapNativeException, NotOpenException, IOException{   
-
+       public static void offlineAnalysis(BufferedReader br) throws PcapNativeException, NotOpenException, IOException{   
+            Long begin = new Date().getTime();
             System.setProperty("log4j.configurationFile","./resources/log4j2.xml");
             logger.info("Commencing sniffing");
 
-            PcapNetworkInterface device = getNetworkDevice();
-            System.out.println("You chose: " + device);
-
-            if(device == null ){
-                System.out.println("No device chosen");
-                System.exit(1);
+         
+            PcapHandle handle;
+             try {
+                handle = Pcaps.openOffline("test.pcap", TimestampPrecision.NANO);
+            } catch (PcapNativeException e) {
+                handle = Pcaps.openOffline("test.pcap");
             }
-            
-            final PcapHandle handle;
             // Open the Device and get a handle
-            int snapshotLength = 65536;
-            int readTimeout = 50;
-            handle = device.openLive(snapshotLength, PromiscuousMode.PROMISCUOUS, readTimeout);
-            
+          
+                
             //Create Rule Array 
             final Rule[] ruleSet = RuleSetGenerator.createRuleSet(br);
 
@@ -54,24 +49,17 @@ public class OnlineInquiry{
 
                 @Override
                 public void gotPacket(PcapPacket packet) {
-                  
-                    IpV4Packet ipacket = packet.get(IpV4Packet.class);
+
+                    System.out.println(packet.toHexString());
 
                    for(Rule x : ruleSet){
 
                         String pattern = x.getPattern();
-                        boolean keyword = RegexSearch.search(packet.toHexString(), pattern);
 
+                        boolean keyword = RegexSearch.search(packet.toHexString(), pattern);
                         if(keyword == true){
-                         System.out.println("Match! bei Regel "+x.getId()+" Nachricht: "+x.getMsg());
-                         try{
-                            if(db){
-                                DbPush.push(x.getCve(), x.getMsg(),new Date().toString(), ipacket.getHeader().getSrcAddr().toString());
-                            }
-                            
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
+                         System.out.println("Match!\n\n");
+                    
                         }
                         
                     }
@@ -82,15 +70,20 @@ public class OnlineInquiry{
 
 
             try {
-                int maxPackets = (int)(Math.pow(10, 7));
+                int maxPackets = (int)(Math.pow(10, 5));
                 threading(handle, maxPackets, listener);
+                
             } 
             catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                      
+         
+            handle.close();
+            Long end = new Date().getTime();
+            Long total = end-begin;
+             System.out.println("Die Untersuchung hat "+total+" Millisekunden gedauert");
             }
-
+            
             static void threading(PcapHandle handle, int maxPackets, PacketListener listener) throws InterruptedException{
                 Thread thread = new Thread(){
                     @Override
@@ -102,7 +95,7 @@ public class OnlineInquiry{
                     }
                     }
                 };
-                thread.start();    
+                thread.start();
             }
 
             static PcapNetworkInterface getNetworkDevice() {
@@ -113,7 +106,7 @@ public class OnlineInquiry{
                 e.printStackTrace();
             }
             return device;
-        }
+            }
 
 
 }

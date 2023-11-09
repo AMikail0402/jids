@@ -11,7 +11,7 @@ import okhttp3.Response;
 public class DbCheck {
  
 
-    public static void isAvailable() throws IOException{
+    public static boolean isAvailable() throws IOException{
         OkHttpClient client = new OkHttpClient();
       
         Request request = new Request.Builder()
@@ -25,15 +25,15 @@ public class DbCheck {
             Response response = client.newCall(request).execute();
             if(response.code() == 200){
                 System.out.println("Datenbankanbindung funktioniert !");
-                return;
+                return true;
             }
             else{
                 System.out.println("Datenbankanbindung funktioniert nicht !");
-                return;
+                return false;
             }
         } catch (ConnectException e) {
             System.out.println("Datenbankanbindung funktioniert nicht !");
-            return;
+            return false;
         }
         
     }
