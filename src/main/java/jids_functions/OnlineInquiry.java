@@ -6,12 +6,14 @@ import java.io.IOException;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.pcap4j.Pcap4jPropertiesLoader;
 import org.pcap4j.core.NotOpenException;
 import org.pcap4j.core.PacketListener;
 import org.pcap4j.core.PcapHandle;
 import org.pcap4j.core.PcapNativeException;
 import org.pcap4j.core.PcapNetworkInterface;
 import org.pcap4j.core.PcapNetworkInterface.PromiscuousMode;
+import org.pcap4j.packet.IpV4Packet;
 import org.pcap4j.core.PcapPacket;
 import org.pcap4j.core.PcapStat;
 import org.pcap4j.util.NifSelector;
@@ -28,15 +30,16 @@ public class OnlineInquiry{
 
        public static void onlineAnalysis(BufferedReader br) throws PcapNativeException, NotOpenException, IOException{   
             System.setProperty("log4j.configurationFile","./resources/log4j2.xml");
-            FileInputStream isAvailable = new FileInputStream("./resources/log4j2.xml");
             logger.info("Commencing sniffing");
+
             PcapNetworkInterface device = getNetworkDevice();
             System.out.println("You chose: " + device);
+
             if(device == null ){
                 System.out.println("No device chosen");
                 System.exit(1);
             }
-
+            
             final PcapHandle handle;
             // Open the Device and get a handle
             int snapshotLength = 65536;
@@ -52,11 +55,13 @@ public class OnlineInquiry{
                 @Override
                 public void gotPacket(PcapPacket packet) {
                     System.out.println(packet.toHexString());
+                    IpV4Packet ipacket = packet.get(IpV4Packet.class);
                    for(Rule x : ruleSet){
                         String pattern = x.getPattern();
-                        boolean keyword = RegexSearch.search(packet.toHexString(), pattern);
+                        boolean keyword = RegexSearch.search(ipacket.toHexString(), pattern);
                         if(keyword == true){
                            // logger.info("Verstoß: "+x.getMsg());
+                           System.out.println("Ursprungsadresse: "+ipacket.getHeader().getSrcAddr());
                             System.out.println("Match!\n\n");
                         }
                         
