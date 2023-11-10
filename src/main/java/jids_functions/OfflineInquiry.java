@@ -25,7 +25,7 @@ import jids.util.RuleSetGenerator;
 
 public class OfflineInquiry extends Thread {
 
-
+        static int counter = 0 ;
 
        public static void offlineAnalysis(BufferedReader br, boolean db) throws PcapNativeException, NotOpenException, IOException{   
             
@@ -41,7 +41,7 @@ public class OfflineInquiry extends Thread {
             }
             // Open the Device and get a handle
           
-                
+            
             //Create Rule Array 
             final Rule[] ruleSet = RuleSetGenerator.createRuleSet(br);
 
@@ -57,7 +57,16 @@ public class OfflineInquiry extends Thread {
 
                         String pattern = x.getPattern();
                         threadingRegex(x, packet.toHexString(), pattern, db, ipacket);
-                       
+                      /*  boolean keyword  = RegexSearch.search(packet.toHexString(), pattern);
+                        if(keyword){
+                            try {
+                                DbPush.push(x.getCve(), x.getMsg(),new Date().toString(), ipacket.getHeader().getSrcAddr().toString());
+                            } catch (IOException e) {
+                                
+                                e.printStackTrace();
+                            }
+                            counter++;
+                        }*/ 
                         
                     }
                     
@@ -68,8 +77,8 @@ public class OfflineInquiry extends Thread {
 
             try {
                 int maxPackets = (int)(Math.pow(10, 5));
-               // handle.loop(maxPackets, listener);
-                threadingHandle(handle, maxPackets, listener);
+                handle.loop(maxPackets, listener);
+                //threadingHandle(handle, maxPackets, listener);
             } 
             catch (InterruptedException e) {
                     e.printStackTrace();
@@ -79,6 +88,7 @@ public class OfflineInquiry extends Thread {
             Long end = new Date().getTime();
             Long total = end-begin;
             System.out.println("Die Untersuchung hat "+total+" Millisekunden gedauert");
+            System.out.println(counter+" gefährliche Pakete wurden gefunden");
             }
             
             static void threadingRegex(Rule x, String input, String pattern, boolean db,IpV4Packet ipacket ){
@@ -88,6 +98,7 @@ public class OfflineInquiry extends Thread {
                     public void run(){
                         boolean keyword  = RegexSearch.search(input, pattern);
                           if(keyword == true){
+                            counter++;
                          System.out.println("Match!\n\n");
                          if(db){
                                 try {

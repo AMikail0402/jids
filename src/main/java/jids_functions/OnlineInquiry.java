@@ -69,8 +69,8 @@ public class OnlineInquiry{
 
             try {
                 int maxPackets = (int)(Math.pow(10, 7));
-                //handle.loop(maxPackets,listener);
-                threadingHandle(handle, maxPackets, listener);
+                handle.loop(maxPackets,listener);
+                //threadingHandle(handle, maxPackets, listener);
             } 
             catch (InterruptedException e) {
                     e.printStackTrace();
