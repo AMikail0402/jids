@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.Date;
 
+import org.apache.logging.log4j.core.tools.picocli.CommandLine.Help.IParamLabelRenderer;
 import org.pcap4j.core.NotOpenException;
 import org.pcap4j.core.PacketListener;
 import org.pcap4j.core.PcapHandle;
@@ -12,8 +13,10 @@ import org.pcap4j.core.PcapNativeException;
 import org.pcap4j.core.PcapNetworkInterface;
 import org.pcap4j.core.PcapPacket;
 import org.pcap4j.core.Pcaps;
+import org.pcap4j.packet.IpV4Packet;
 import org.pcap4j.util.NifSelector;
 
+import api.DbPush;
 import jids.Objects.Rule;
 import jids.util.RegexSearch;
 import jids.util.RuleSetGenerator;
@@ -24,7 +27,7 @@ public class OfflineInquiry extends Thread {
 
 
 
-       public static void offlineAnalysis(BufferedReader br) throws PcapNativeException, NotOpenException, IOException{   
+       public static void offlineAnalysis(BufferedReader br, boolean db) throws PcapNativeException, NotOpenException, IOException{   
             
             Long begin = new Date().getTime();
             System.setProperty("log4j.configurationFile","./resources/log4j2.xml");
@@ -49,11 +52,11 @@ public class OfflineInquiry extends Thread {
                 public void gotPacket(PcapPacket packet) {
 
                     System.out.println(packet.toHexString());
-
+                        IpV4Packet ipacket = packet.get(IpV4Packet.class);
                         for(Rule x : ruleSet){
 
                         String pattern = x.getPattern();
-                        threadingRegex(packet.toHexString(), pattern);
+                        threadingRegex(x, packet.toHexString(), pattern, db, ipacket);
                        
                         
                     }
@@ -78,7 +81,7 @@ public class OfflineInquiry extends Thread {
             System.out.println("Die Untersuchung hat "+total+" Millisekunden gedauert");
             }
             
-            static void threadingRegex(String input, String pattern){
+            static void threadingRegex(Rule x, String input, String pattern, boolean db,IpV4Packet ipacket ){
                      
                 Thread thread = new Thread(){
                     @Override
@@ -86,6 +89,13 @@ public class OfflineInquiry extends Thread {
                         boolean keyword  = RegexSearch.search(input, pattern);
                           if(keyword == true){
                          System.out.println("Match!\n\n");
+                         if(db){
+                                try {
+                                    DbPush.push(x.getCve(), x.getMsg(),new Date().toString(), ipacket.getHeader().getSrcAddr().toString());
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                            }
                         }
                     }
                 };

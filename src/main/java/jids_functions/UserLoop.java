@@ -28,7 +28,7 @@ class UserLoop{
             OnlineInquiry.onlineAnalysis(br,db);
         }
         if(answer.equals("off")){
-            OfflineInquiry.offlineAnalysis(br);
+            OfflineInquiry.offlineAnalysis(br,db);
         }
     }
 }
