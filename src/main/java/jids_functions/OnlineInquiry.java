@@ -58,7 +58,6 @@ public class OnlineInquiry{
                    for(Rule x : ruleSet){
 
                         String pattern = x.getPattern();
-                        //boolean keyword = RegexSearch.search(packet.toHexString(), pattern);
                         threadingRegex(x, packet.toHexString(), pattern, db, ipacket);
 
                     }
@@ -70,6 +69,7 @@ public class OnlineInquiry{
 
             try {
                 int maxPackets = (int)(Math.pow(10, 7));
+                //handle.loop(maxPackets,listener);
                 threadingHandle(handle, maxPackets, listener);
             } 
             catch (InterruptedException e) {
