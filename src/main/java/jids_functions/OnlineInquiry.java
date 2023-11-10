@@ -58,20 +58,9 @@ public class OnlineInquiry{
                    for(Rule x : ruleSet){
 
                         String pattern = x.getPattern();
-                        boolean keyword = RegexSearch.search(packet.toHexString(), pattern);
+                        //boolean keyword = RegexSearch.search(packet.toHexString(), pattern);
+                        threadingRegex(x, packet.toHexString(), pattern, db, ipacket);
 
-                        if(keyword == true){
-                         System.out.println("Match! bei Regel "+x.getId()+" Nachricht: "+x.getMsg());
-                         try{
-                            if(db){
-                                DbPush.push(x.getCve(), x.getMsg(),new Date().toString(), ipacket.getHeader().getSrcAddr().toString());
-                            }
-                            
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                        
                     }
                     
                 }
@@ -81,7 +70,7 @@ public class OnlineInquiry{
 
             try {
                 int maxPackets = (int)(Math.pow(10, 7));
-                threading(handle, maxPackets, listener);
+                threadingHandle(handle, maxPackets, listener);
             } 
             catch (InterruptedException e) {
                     e.printStackTrace();
@@ -89,7 +78,30 @@ public class OnlineInquiry{
                       
             }
 
-            static void threading(PcapHandle handle, int maxPackets, PacketListener listener) throws InterruptedException{
+            static void threadingRegex(Rule x, String input, String pattern, boolean db,IpV4Packet ipacket ){
+                     
+                Thread thread = new Thread(){
+                    @Override
+                    public void run(){
+                        boolean keyword  = RegexSearch.search(input, pattern);
+                          if(keyword == true){
+
+                         System.out.println("Match!\n\n");
+                        if(db){
+                                try {
+                                    DbPush.push(x.getCve(), x.getMsg(),new Date().toString(), ipacket.getHeader().getSrcAddr().toString());
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                            
+                        }
+                    }
+                };
+                thread.start();
+            }
+
+            static void threadingHandle(PcapHandle handle, int maxPackets, PacketListener listener) throws InterruptedException{
                 Thread thread = new Thread(){
                     @Override
                     public void run(){

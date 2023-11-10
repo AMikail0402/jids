@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.Date;
 
-import org.apache.logging.log4j.Logger;
 import org.pcap4j.core.NotOpenException;
 import org.pcap4j.core.PacketListener;
 import org.pcap4j.core.PcapHandle;
@@ -27,7 +26,7 @@ public class OfflineInquiry extends Thread {
 
        public static void offlineAnalysis(BufferedReader br) throws PcapNativeException, NotOpenException, IOException{   
             
-        Long begin = new Date().getTime();
+            Long begin = new Date().getTime();
             System.setProperty("log4j.configurationFile","./resources/log4j2.xml");
 
          
@@ -51,15 +50,11 @@ public class OfflineInquiry extends Thread {
 
                     System.out.println(packet.toHexString());
 
-                   for(Rule x : ruleSet){
+                        for(Rule x : ruleSet){
 
                         String pattern = x.getPattern();
-
-                        boolean keyword = RegexSearch.search(packet.toHexString(), pattern);
-                        if(keyword == true){
-                         System.out.println("Match!\n\n");
-                    
-                        }
+                        threadingRegex(packet.toHexString(), pattern);
+                       
                         
                     }
                     
@@ -70,8 +65,8 @@ public class OfflineInquiry extends Thread {
 
             try {
                 int maxPackets = (int)(Math.pow(10, 5));
-                threading(handle, maxPackets, listener);
-                
+                //handle.loop(maxPackets, listener);
+                threadingHandle(handle, maxPackets, listener);
             } 
             catch (InterruptedException e) {
                     e.printStackTrace();
@@ -80,10 +75,24 @@ public class OfflineInquiry extends Thread {
             handle.close();
             Long end = new Date().getTime();
             Long total = end-begin;
-             System.out.println("Die Untersuchung hat "+total+" Millisekunden gedauert");
+            System.out.println("Die Untersuchung hat "+total+" Millisekunden gedauert");
             }
             
-            static void threading(PcapHandle handle, int maxPackets, PacketListener listener) throws InterruptedException{
+            static void threadingRegex(String input, String pattern){
+                     
+                Thread thread = new Thread(){
+                    @Override
+                    public void run(){
+                        boolean keyword  = RegexSearch.search(input, pattern);
+                          if(keyword == true){
+                         System.out.println("Match!\n\n");
+                        }
+                    }
+                };
+                thread.start();
+            }
+
+            static void threadingHandle(PcapHandle handle, int maxPackets, PacketListener listener) throws InterruptedException{
                 Thread thread = new Thread(){
                     @Override
                     public void run(){
