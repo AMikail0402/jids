@@ -51,23 +51,13 @@ public class OfflineInquiry extends Thread {
                 @Override
                 public void gotPacket(PcapPacket packet) {
 
-                    System.out.println(packet.toHexString());
+                    
                         IpV4Packet ipacket = packet.get(IpV4Packet.class);
                         for(Rule x : ruleSet){
 
                         String pattern = x.getPattern();
                         threadingRegex(x, packet.toHexString(), pattern, db, ipacket);
-                      /*  boolean keyword  = RegexSearch.search(packet.toHexString(), pattern);
-                        if(keyword){
-                            try {
-                                DbPush.push(x.getCve(), x.getMsg(),new Date().toString(), ipacket.getHeader().getSrcAddr().toString());
-                            } catch (IOException e) {
-                                
-                                e.printStackTrace();
-                            }
-                            counter++;
-                        }*/ 
-                        
+                                   
                     }
                     
                 }
