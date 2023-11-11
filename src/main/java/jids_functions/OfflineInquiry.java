@@ -68,7 +68,7 @@ public class OfflineInquiry extends Thread {
             try {
                 int maxPackets = (int)(Math.pow(10, 5));
                 handle.loop(maxPackets, listener);
-                //threadingHandle(handle, maxPackets, listener);
+                
             } 
             catch (InterruptedException e) {
                     e.printStackTrace();

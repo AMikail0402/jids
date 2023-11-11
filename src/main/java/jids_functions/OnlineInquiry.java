@@ -23,7 +23,7 @@ import jids.util.RuleSetGenerator;
 
 public class OnlineInquiry{
 
-      
+    
 
        public static void onlineAnalysis(BufferedReader br, boolean db) throws PcapNativeException, NotOpenException, IOException{   
 
@@ -52,6 +52,7 @@ public class OnlineInquiry{
 
                 @Override
                 public void gotPacket(PcapPacket packet) {
+                    System.out.println(packet.toHexString());
                   
                     IpV4Packet ipacket = packet.get(IpV4Packet.class);
 
@@ -70,7 +71,6 @@ public class OnlineInquiry{
             try {
                 int maxPackets = (int)(Math.pow(10, 7));
                 handle.loop(maxPackets,listener);
-                //threadingHandle(handle, maxPackets, listener);
             } 
             catch (InterruptedException e) {
                     e.printStackTrace();
@@ -92,6 +92,7 @@ public class OnlineInquiry{
                                     DbPush.push(x.getCve(), x.getMsg(),new Date().toString(), ipacket.getHeader().getSrcAddr().toString());
                                 } catch (IOException e) {
                                     e.printStackTrace();
+                                    System.out.println("Datenbank konnte nicht erreicht werden !");
                                 }
                             }
                             
