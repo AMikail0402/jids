@@ -20,7 +20,7 @@ public class DbPush {
         MediaType mediaType = MediaType.parse("application/json");
         RequestBody body = RequestBody.create(mediaType, "{\n\t\"cve\": \""+cve+"\",\n\t\"msg\": \""+msg+"\",\n\t\"time\": \""+time+"\",\n\t\"src_address\": \""+srcAddress+"\"\n}");
         Request request = new Request.Builder()
-          .url("http://localhost:3000/api/users?=")
+          .url("http://localhost:3001/api/users?=")
           .post(body)
           .addHeader("Content-Type", "application/json")
           .addHeader("User-Agent", "insomnia/2023.5.8")

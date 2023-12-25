@@ -15,7 +15,7 @@ public class DbCheck {
         OkHttpClient client = new OkHttpClient();
       
         Request request = new Request.Builder()
-        .url("http://localhost:3000/api")
+        .url("http://localhost:3001/api")
         .get()
         .addHeader("Content-Type", "application/json")
         .addHeader("User-Agent", "insomnia/2023.5.8")
