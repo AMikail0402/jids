@@ -1,18 +1,10 @@
 package jids.util;
 
-import java.io.FileNotFoundException;
-
 import jids.enums.Patterns;
 
 public class RulePatternGenerator {
     
  
-    public static void main(String[] args) throws FileNotFoundException{
-        String rule = RulePatternGenerator.totalRule("HTTP source-ip 192.168.178.141 dest-ip 192.168.178.141 source-port 62070 dest-port 80");
-        System.out.println(rule);
-     
-    }
-
     public static String totalRule(String rule){
     String mode = RulePatternGenerator.mode(rule);
  
