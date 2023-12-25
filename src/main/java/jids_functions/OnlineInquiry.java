@@ -56,12 +56,10 @@ public class OnlineInquiry{
                 public void gotPacket(Packet packet) {
                   
                     IpV4Packet ipacket = packet.get(IpV4Packet.class);
-                    String packetString = ipacket.toHexString();
-                    System.out.println("Ein Paket: \n"+packetString);
                    for(Rule x : ruleSet){
 
                         String pattern = x.getPattern();
-                        threadingRegex(x, packetString, pattern, db, ipacket);
+                        threadingRegex(x, ipacket.toHexString(), pattern, db, ipacket);
 
                     }
                     
@@ -89,6 +87,8 @@ public class OnlineInquiry{
                           if(keyword == true){
 
                          System.out.println("Match!\n\n");
+                         System.out.println("Das Paket"+input);
+                         System.out.println("Das Muster"+pattern);
                         if(db){
                                 try {
                                     DbPush.push(x.getCve(), x.getMsg(),new Date().toString(), ipacket.getHeader().getSrcAddr().toString());
