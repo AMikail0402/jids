@@ -16,7 +16,6 @@ import org.pcap4j.core.PcapNetworkInterface.PromiscuousMode;
 import org.pcap4j.packet.IpV4Packet;
 import org.pcap4j.core.PcapPacket;
 import org.pcap4j.core.Pcaps;
-import org.pcap4j.util.NifSelector;
 
 import api.DbPush;
 import jids.Objects.Rule;
@@ -56,14 +55,13 @@ public class OnlineInquiry{
 
                 @Override
                 public void gotPacket(PcapPacket packet) {
-                    System.out.println(packet.toHexString());
                   
                     IpV4Packet ipacket = packet.get(IpV4Packet.class);
-
+                    String packetString = ipacket.getHeader().toHexString();
                    for(Rule x : ruleSet){
 
                         String pattern = x.getPattern();
-                        threadingRegex(x, packet.toHexString(), pattern, db, ipacket);
+                        threadingRegex(x, packetString, pattern, db, ipacket);
 
                     }
                     

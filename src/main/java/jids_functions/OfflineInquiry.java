@@ -117,15 +117,6 @@ public class OfflineInquiry extends Thread {
                 thread.start();
             }
 
-            static PcapNetworkInterface getNetworkDevice() {
-            PcapNetworkInterface device = null;
-            try {
-                device = new NifSelector().selectNetworkInterface();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            return device;
-            }
-
+       
 
 }
