@@ -2,7 +2,6 @@ package jids_functions;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.net.InetAddress;
 import java.util.Date;
 import java.util.List;
 
@@ -14,7 +13,7 @@ import org.pcap4j.core.PcapNativeException;
 import org.pcap4j.core.PcapNetworkInterface;
 import org.pcap4j.core.PcapNetworkInterface.PromiscuousMode;
 import org.pcap4j.packet.IpV4Packet;
-import org.pcap4j.core.PcapPacket;
+import org.pcap4j.packet.Packet;
 import org.pcap4j.core.Pcaps;
 
 import api.DbPush;
@@ -54,7 +53,7 @@ public class OnlineInquiry{
             PacketListener listener = new PacketListener() {
 
                 @Override
-                public void gotPacket(PcapPacket packet) {
+                public void gotPacket(Packet packet) {
                   
                     IpV4Packet ipacket = packet.get(IpV4Packet.class);
                     String packetString = ipacket.getHeader().toHexString();

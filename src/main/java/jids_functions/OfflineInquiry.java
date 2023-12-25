@@ -11,9 +11,9 @@ import org.pcap4j.core.PcapHandle;
 import org.pcap4j.core.PcapHandle.TimestampPrecision;
 import org.pcap4j.core.PcapNativeException;
 import org.pcap4j.core.PcapNetworkInterface;
-import org.pcap4j.core.PcapPacket;
 import org.pcap4j.core.Pcaps;
 import org.pcap4j.packet.IpV4Packet;
+import org.pcap4j.packet.Packet;
 import org.pcap4j.util.NifSelector;
 
 import api.DbPush;
@@ -49,14 +49,14 @@ public class OfflineInquiry extends Thread {
             PacketListener listener = new PacketListener() {
 
                 @Override
-                public void gotPacket(PcapPacket packet) {
+                public void gotPacket(Packet packet) {
 
                     
                         IpV4Packet ipacket = packet.get(IpV4Packet.class);
                         for(Rule x : ruleSet){
 
                         String pattern = x.getPattern();
-                        threadingRegex(x, packet.toHexString(), pattern, db, ipacket);
+                        threadingRegex(x, ipacket.toHexString(), pattern, db, ipacket);
                                    
                     }
                     
