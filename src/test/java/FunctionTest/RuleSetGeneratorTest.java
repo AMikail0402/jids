@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import jids.Objects.Rule;
 import jids.util.RuleSetGenerator;
@@ -22,7 +23,7 @@ public class RuleSetGeneratorTest {
                 }
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     public void ruleArrayGeneratorTest() throws IOException{
             
                 FileInputStream fis = new FileInputStream("./src/test/java/FunctionTest/test.conf");

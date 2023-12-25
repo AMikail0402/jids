@@ -3,6 +3,7 @@ package ObjectTest;
 import static org.mockito.Mockito.spy;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import jids.Objects.Rule;
 
@@ -12,7 +13,7 @@ public class RuleObjectTest {
 
  
 
-    @org.junit.jupiter.api.Test
+    @Test
     public void ruleToStringTest(){
 
         spyRule.setCve("cve");
