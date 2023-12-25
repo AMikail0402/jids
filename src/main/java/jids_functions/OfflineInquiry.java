@@ -35,9 +35,9 @@ public class OfflineInquiry extends Thread {
          
             PcapHandle handle;
              try {
-                handle = Pcaps.openOffline("test.pcap", TimestampPrecision.NANO);
+                handle = Pcaps.openOffline("./test.pcap", TimestampPrecision.NANO);
             } catch (PcapNativeException e) {
-                handle = Pcaps.openOffline("test.pcap");
+                handle = Pcaps.openOffline("./test.pcap");
             }
             // Open the Device and get a handle
           
