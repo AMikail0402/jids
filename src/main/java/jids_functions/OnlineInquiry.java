@@ -57,6 +57,7 @@ public class OnlineInquiry{
                   
                     IpV4Packet ipacket = packet.get(IpV4Packet.class);
                     String packetString = ipacket.getHeader().toHexString();
+                    System.out.println(packetString);
                    for(Rule x : ruleSet){
 
                         String pattern = x.getPattern();
