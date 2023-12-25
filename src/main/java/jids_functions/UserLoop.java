@@ -14,20 +14,17 @@ import api.DbCheck;
 class UserLoop{
    
 
-    public static void startUp() throws PcapNativeException, NotOpenException, IOException{
+    public static void startUp(String address) throws PcapNativeException, NotOpenException, IOException{
         boolean db = DbCheck.isAvailable();
-        System.out.println("Was wollen sie tun? Online-Filtering: on; Offline-Filtering: off; Auswertung: analysis");
-        Scanner myScanner = new Scanner(System.in);
-        String answer = myScanner.nextLine().toLowerCase();
 
         FileInputStream fis = new FileInputStream("./rules.conf");
         InputStreamReader isr = new InputStreamReader(fis, "UTF-8");
         BufferedReader br = new BufferedReader(isr);
         
-        if(answer.equals("on")){
-            OnlineInquiry.onlineAnalysis(br,db);
+        if(!address.equals("offline")){
+            OnlineInquiry.onlineAnalysis(br,db,address);
         }
-        if(answer.equals("off")){
+        else{
             OfflineInquiry.offlineAnalysis(br,db);
         }
     }

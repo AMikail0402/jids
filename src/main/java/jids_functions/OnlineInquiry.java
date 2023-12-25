@@ -2,16 +2,20 @@ package jids_functions;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.net.InetAddress;
 import java.util.Date;
+import java.util.List;
 
 import org.pcap4j.core.NotOpenException;
 import org.pcap4j.core.PacketListener;
+import org.pcap4j.core.PcapAddress;
 import org.pcap4j.core.PcapHandle;
 import org.pcap4j.core.PcapNativeException;
 import org.pcap4j.core.PcapNetworkInterface;
 import org.pcap4j.core.PcapNetworkInterface.PromiscuousMode;
 import org.pcap4j.packet.IpV4Packet;
 import org.pcap4j.core.PcapPacket;
+import org.pcap4j.core.Pcaps;
 import org.pcap4j.util.NifSelector;
 
 import api.DbPush;
@@ -25,12 +29,12 @@ public class OnlineInquiry{
 
     
 
-       public static void onlineAnalysis(BufferedReader br, boolean db) throws PcapNativeException, NotOpenException, IOException{   
+       public static void onlineAnalysis(BufferedReader br, boolean db,String address) throws PcapNativeException, NotOpenException, IOException{   
 
             System.setProperty("log4j.configurationFile","./resources/log4j2.xml");
 
 
-            PcapNetworkInterface device = getNetworkDevice();
+            PcapNetworkInterface device = getNetworkDevice(address);
             System.out.println("You chose: " + device);
 
             if(device == null ){
@@ -116,13 +120,24 @@ public class OnlineInquiry{
                 thread.start();    
             }
 
-            static PcapNetworkInterface getNetworkDevice() {
-            PcapNetworkInterface device = null;
-            try {
-                device = new NifSelector().selectNetworkInterface();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            static PcapNetworkInterface getNetworkDevice(String address) throws PcapNativeException {
+                PcapNetworkInterface device = null;
+            
+                List<PcapNetworkInterface> devices = Pcaps.findAllDevs();
+            
+                
+                for(PcapNetworkInterface x : devices){
+                   List<PcapAddress> addr = x.getAddresses();
+                   for(PcapAddress p : addr){
+                    System.out.println("Die Addresse "+p.getAddress());
+                    if(p.getAddress().toString().replaceAll("\\/", "").equals(address)){
+                        device = x;
+                    }
+                   }
+                }
+              
+           
+         
             return device;
         }
 

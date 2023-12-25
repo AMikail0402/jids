@@ -8,16 +8,12 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                docker.image('maven').inside{
                 sh 'mvn clean install -DskipTests'
-                }
             }
         }
         stage('Test') {
             steps {
-                docker.image('maven').inside{
-                sh 'mvn clean test'
-                }
+                sh 'mvn test'
             }
         }
     }

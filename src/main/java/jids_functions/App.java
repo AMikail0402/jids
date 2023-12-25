@@ -20,11 +20,17 @@ public class App
             "   //   //  //   //      //  \r\n" + //
             "////   //  //////    /////";
 
-    public static void main( String[] args ) throws FileNotFoundException, UnsupportedEncodingException, IOException, InterruptedException, PcapNativeException, NotOpenException
+    public static void main(String[] args ) throws FileNotFoundException, UnsupportedEncodingException, IOException, InterruptedException, PcapNativeException, NotOpenException
     {
+        String address;
+        startUpSequence(startUpLogo);
+        try{
+        address = args[0];}
+        catch(IndexOutOfBoundsException e){
+          address = "offline";
+        }
 
-      startUpSequence(startUpLogo);
-      UserLoop.startUp();
+        UserLoop.startUp(address);
     
     }
 
