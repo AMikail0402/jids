@@ -1,4 +1,4 @@
-package jids.ObjectTest;
+package ObjectTest;
 
 import static org.mockito.Mockito.spy;
 

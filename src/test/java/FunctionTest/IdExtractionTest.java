@@ -1,4 +1,4 @@
-package jids.FunctionTest;
+package FunctionTest;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -22,7 +22,7 @@ public class IdExtractionTest {
     @Test
     public void readIdOutOfFile() throws IOException{
 
-        FileInputStream fis = new FileInputStream("./src/test/java/jids/FunctionTest/test.conf");
+        FileInputStream fis = new FileInputStream("./src/test/java/FunctionTest/test.conf");
         InputStreamReader isr = new InputStreamReader(fis, "UTF-8");
         BufferedReader br = new BufferedReader(isr);
         String lineOne = br.readLine();

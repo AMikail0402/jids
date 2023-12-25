@@ -1,4 +1,4 @@
-package jids.FunctionTest;
+package FunctionTest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -24,7 +24,7 @@ public class CveExtractionTest {
     @Test
     public void readCveOutOfFile() throws IOException{
 
-        FileInputStream fis = new FileInputStream("./src/test/java/jids/FunctionTest/test.conf");
+        FileInputStream fis = new FileInputStream("./src/test/java/FunctionTest/test.conf");
         InputStreamReader isr = new InputStreamReader(fis, "UTF-8");
         BufferedReader br = new BufferedReader(isr);
         String lineOne = br.readLine();

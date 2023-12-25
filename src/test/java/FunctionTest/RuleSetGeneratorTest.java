@@ -1,4 +1,4 @@
-package jids.FunctionTest;
+package FunctionTest;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -13,7 +13,7 @@ import jids.util.RuleSetGenerator;
 public class RuleSetGeneratorTest {
 
     public static void main(String[] args) throws IOException{
-            FileInputStream fis = new FileInputStream("./jids/src/test/java/jids/FunctionTest/test.conf");
+            FileInputStream fis = new FileInputStream("./jids/src/test/java/FunctionTest/test.conf");
             InputStreamReader isr = new InputStreamReader(fis, "UTF-8");
             BufferedReader br = new BufferedReader(isr);
                 Rule[] ruleArray = RuleSetGenerator.createRuleSet(br);
@@ -25,7 +25,7 @@ public class RuleSetGeneratorTest {
     @org.junit.jupiter.api.Test
     public void ruleArrayGeneratorTest() throws IOException{
             
-                FileInputStream fis = new FileInputStream("./src/test/java/jids/FunctionTest/test.conf");
+                FileInputStream fis = new FileInputStream("./src/test/java/FunctionTest/test.conf");
                 InputStreamReader isr = new InputStreamReader(fis, "UTF-8");
                 BufferedReader br = new BufferedReader(isr);
                 Rule[] ruleArray = RuleSetGenerator.createRuleSet(br);

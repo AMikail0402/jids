@@ -1,4 +1,4 @@
-package jids.FunctionTest;
+package FunctionTest;
 
 import org.junit.jupiter.api.Assertions;
 
