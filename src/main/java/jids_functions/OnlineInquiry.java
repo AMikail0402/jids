@@ -120,8 +120,13 @@ public class OnlineInquiry{
 
             static PcapNetworkInterface getNetworkDevice(String address) throws PcapNativeException {
                 PcapNetworkInterface device = null;
-            
-                List<PcapNetworkInterface> devices = Pcaps.findAllDevs();
+                List<PcapNetworkInterface> devices;
+                try{
+                devices = Pcaps.findAllDevs();
+                }catch(Exception e){
+                    devices = null;
+                    throw e;
+                }
             
                 
                 for(PcapNetworkInterface x : devices){
