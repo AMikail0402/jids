@@ -9,7 +9,11 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class DbPush {
-    static OkHttpClient staticClient = new OkHttpClient();
+    static OkHttpClient staticClient;
+
+    public static void init(){
+        staticClient = new OkHttpClient();
+    }
 
     public static void push(String cve, String msg, String time, String srcAddress) throws IOException{
 

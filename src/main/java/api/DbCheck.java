@@ -25,6 +25,7 @@ public class DbCheck {
             Response response = client.newCall(request).execute();
             if(response.code() == 200){
                 System.out.println("Datenbankanbindung funktioniert !");
+                DbPush.init();
                 return true;
             }
             else{

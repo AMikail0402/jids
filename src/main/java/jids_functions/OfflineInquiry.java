@@ -4,17 +4,15 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.Date;
 
-import org.apache.logging.log4j.core.tools.picocli.CommandLine.Help.IParamLabelRenderer;
 import org.pcap4j.core.NotOpenException;
 import org.pcap4j.core.PacketListener;
 import org.pcap4j.core.PcapHandle;
 import org.pcap4j.core.PcapHandle.TimestampPrecision;
 import org.pcap4j.core.PcapNativeException;
-import org.pcap4j.core.PcapNetworkInterface;
 import org.pcap4j.core.Pcaps;
 import org.pcap4j.packet.IpV4Packet;
 import org.pcap4j.packet.Packet;
-import org.pcap4j.util.NifSelector;
+
 
 import api.DbPush;
 import jids.Objects.Rule;
