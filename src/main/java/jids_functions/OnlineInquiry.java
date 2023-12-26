@@ -56,14 +56,11 @@ public class OnlineInquiry{
                 public void gotPacket(Packet packet) {
                    System.out.println("Wir haben ein Paket");
                     IpV4Packet ipacket = packet.get(IpV4Packet.class);
-                    String header = packet.toString();
                     String inpString = extractHexStream(packet.getRawData());
-                    System.out.println("Header "+header);
-                    System.out.println("In String"+inpString);
                    for(Rule x : ruleSet){
 
                         String pattern = x.getPattern();
-                        threadingRegex(x, ipacket.toHexString(), pattern, db, ipacket);
+                        threadingRegex(x, inpString, pattern, db, ipacket);
 
                     }
                     
