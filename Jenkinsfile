@@ -23,7 +23,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 script{
-                sh("nohup java -jar jids-1.0-SNAPSHOT-jar-with-dependencies.jar 127.0.0.1 &> /dev/null &")
+                sh("sudo nohup java -jar jids-1.0-SNAPSHOT-jar-with-dependencies.jar 127.0.0.1 &> /dev/null &")
                 }
             }
         }
