@@ -17,28 +17,28 @@ public class Converter {
         //erstes Oktett    
         firstNum = matcher.group(1);
             //System.out.println("Als Nummer "+firstNum);
-        firstNum = decToHex(firstNum);
+        firstNum = decToHex(firstNum).toUpperCase();
             //System.out.println("Als Hex "+firstNum);
         //zweites Oktett
         secondNum = matcher.group(2);
             //System.out.println("Als Nummer "+secondNum);
-        secondNum = decToHex(secondNum);
+        secondNum = decToHex(secondNum).toUpperCase();
             //System.out.println("Als Hex "+secondNum);
         //drittes Oktett
         thirdNum = matcher.group(3);
             //System.out.println("Als Nummer "+thirdNum);
-        thirdNum = decToHex(thirdNum);
+        thirdNum = decToHex(thirdNum).toUpperCase();
             //System.out.println("Als Hex "+thirdNum);
         //viertes Oktett
         fourthNum = matcher.group(4);
             //System.out.println("Als Nummer "+fourthNum);
-        fourthNum = decToHex(fourthNum);
+        fourthNum = decToHex(fourthNum).toUpperCase();
             //System.out.println("Als Hex "+fourthNum);
             
         //Erstellung des Zusatzes
-        String rule = firstNum+"(?:.|\\n)"+secondNum+"(?:.|\\n)"+thirdNum+"(?:.|\\n)"+fourthNum;
+        String rule = firstNum+secondNum+thirdNum+fourthNum;
             //System.out.println(rule.toLowerCase());
-        return rule.toLowerCase();
+        return rule;
     }
             
         return "";
@@ -47,7 +47,7 @@ public class Converter {
     public static String convertPortToHexRule(String port){
         String result = decToHex(port);
 
-        return result.toLowerCase();
+        return result.toUpperCase();
 
     }
 

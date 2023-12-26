@@ -25,7 +25,7 @@ public class App
         String address;
         startUpSequence(startUpLogo);
         try{
-        address = args[0];}
+        address = "192.168.56.1";}
         catch(IndexOutOfBoundsException e){
           address = "offline";
         }

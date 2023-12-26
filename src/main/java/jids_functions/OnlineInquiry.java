@@ -54,8 +54,12 @@ public class OnlineInquiry{
 
                 @Override
                 public void gotPacket(Packet packet) {
-                  
+                   System.out.println("Wir haben ein Paket");
                     IpV4Packet ipacket = packet.get(IpV4Packet.class);
+                    String header = packet.toString();
+                    String inpString = extractHexStream(packet.getRawData());
+                    System.out.println("Header "+header);
+                    System.out.println("In String"+inpString);
                    for(Rule x : ruleSet){
 
                         String pattern = x.getPattern();
@@ -76,6 +80,15 @@ public class OnlineInquiry{
                     e.printStackTrace();
                 }
                       
+            }
+            private static String extractHexStream(byte[] arr) {
+                StringBuilder hexStreamBuilder = new StringBuilder();
+        
+                for (byte b : arr) {
+                    hexStreamBuilder.append(String.format("%02X", b));
+                }
+        
+                return hexStreamBuilder.toString();
             }
 
             static void threadingRegex(Rule x, String input, String pattern, boolean db,IpV4Packet ipacket ){
