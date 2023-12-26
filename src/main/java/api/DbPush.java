@@ -9,13 +9,9 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class DbPush {
-
-    public static void main(String[] args) throws IOException{
-        push("CVE-Example", "Java-Test", "420","Quelladdresse");
-    }
+    static OkHttpClient staticClient = new OkHttpClient();
 
     public static void push(String cve, String msg, String time, String srcAddress) throws IOException{
-        OkHttpClient client = new OkHttpClient();
 
         MediaType mediaType = MediaType.parse("application/json");
         RequestBody body = RequestBody.create(mediaType, "{\n\t\"cve\": \""+cve+"\",\n\t\"msg\": \""+msg+"\",\n\t\"time\": \""+time+"\",\n\t\"src_address\": \""+srcAddress+"\"\n}");
@@ -26,6 +22,6 @@ public class DbPush {
           .addHeader("User-Agent", "insomnia/2023.5.8")
           .build();
         
-        Response response = client.newCall(request).execute();
+        Response response = staticClient.newCall(request).execute();
     }
 }
