@@ -7,7 +7,7 @@ pipeline {
         stage('Build') {
             steps {
                 script{
-                sh 'mvn clean install -DskipTests'
+                sh("mvn clean install -DskipTests")
                 }
             }
         }
@@ -15,17 +15,17 @@ pipeline {
         stage('Test') {
             steps {
                 script{
-                sh 'mvn test'
+                 sh("mvn test")
                 }
             }
         }
 
-        /*stage('Deploy') {
+        stage('Deploy') {
             steps {
                 script{
-                sh 'java -jar jids-1.0-SNAPSHOT-jar-with-dependencies.jar 127.0.0.1'
+                sh("nohup java -jar jids-1.0-SNAPSHOT-jar-with-dependencies.jar 127.0.0.1 &> /dev/null &")
                 }
             }
-        }*/
+        }
     }
 }
