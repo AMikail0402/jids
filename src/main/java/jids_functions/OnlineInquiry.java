@@ -54,7 +54,6 @@ public class OnlineInquiry{
 
                 @Override
                 public void gotPacket(Packet packet) {
-                   System.out.println("Wir haben ein Paket");
                     IpV4Packet ipacket = packet.get(IpV4Packet.class);
                     String inpString = extractHexStream(packet.getRawData());
                    for(Rule x : ruleSet){
