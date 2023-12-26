@@ -44,7 +44,7 @@ public class RulePatternGenerator {
            return "06(?:.|\\n){4}";
         }
         if(mode.equals("HTTP")){
-            return "(?:.|\\n)*48(?:.|\\n)54(?:.|\\n)54(?:.|\\n)50(?:.|\\n)2f(?:.|\\n)31(?:.|\\n)2E(?:.|\\n)31";
+            return "(?:.|\\n)*485454502F312E31";
         }
         return "";
     }
