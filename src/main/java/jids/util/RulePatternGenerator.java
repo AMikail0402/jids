@@ -64,7 +64,7 @@ public class RulePatternGenerator {
         String match = RegexSearch.match(input,Patterns.SRCPORT.getText());
 
         if(match.equals("")){
-        return "..";
+        return ".{4}";
         }        
 
         match = Converter.convertPortToHexRule(match); 
@@ -84,7 +84,7 @@ public class RulePatternGenerator {
         String match = RegexSearch.match(input,Patterns.DSTPORT.getText());
 
         if(match.equals("")){
-        return "..";
+        return ".{4}";
         }        
 
         match = Converter.convertPortToHexRule(match); 
@@ -106,7 +106,7 @@ public class RulePatternGenerator {
     String match = RegexSearch.match(input,Patterns.SRCIP.getText());
   
     if(match.equals("")){
-        return "..";
+        return ".{8}";
     }
     match = Converter.convertIpToHexRule(match); 
     
@@ -117,7 +117,7 @@ public class RulePatternGenerator {
      String match = RegexSearch.match(input,Patterns.DSTIP.getText());
      
      if(match.equals("")){
-        return "..";
+        return ".{8}";
     }
      match = Converter.convertIpToHexRule(match); 
 
