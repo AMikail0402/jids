@@ -37,12 +37,12 @@ public class RuleSetGeneratorTest {
                 Assertions.assertEquals("1",ruleArray[0].getId(),"Die ID der ersten Regel");
                 Assertions.assertEquals("grün",ruleArray[0].getMsg(),"Die Nachricht der ersten Regel ");
                 Assertions.assertEquals("CVE-2023-1237",ruleArray[0].getCve(),"Die CVE der ersten Regel ");
-                Assertions.assertEquals("06(?:.|\\n){7}((?:.|\\n){12})(0a(?:.|\\n)00(?:.|\\n)00(?:.|\\n)0a) ((?:.|\\n){6})(1f 92)",ruleArray[0].getPattern(),"Pattern der ersten Regel ");
+                Assertions.assertEquals("06(?:.|\\n){4}..(0A00000A)..(1F92)",ruleArray[0].getPattern(),"Pattern der ersten Regel ");
                 
                 Assertions.assertEquals("2",ruleArray[1].getId(),"Die ID der zweiten Regel ");
                 Assertions.assertEquals("msg2",ruleArray[1].getMsg(),"Die Nachricht der zweiten Regel ");
                 Assertions.assertEquals("CVE-2022-1235",ruleArray[1].getCve(),"Die CVE der zweiten Regel ");
-                Assertions.assertEquals("06(?:.|\\n){7}((?:.|\\n){12})(0a(?:.|\\n)00(?:.|\\n)00(?:.|\\n)0a) (d1 3a) (1f 90)",ruleArray[1].getPattern(),"Pattern der zweiten Regel ");
+                Assertions.assertEquals("06(?:.|\\n){4}..(0A00000A)(D13A)(1F90)",ruleArray[1].getPattern(),"Pattern der zweiten Regel ");
     }
 
 
