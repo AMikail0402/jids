@@ -56,7 +56,6 @@ public class OnlineInquiry{
                 public void gotPacket(Packet packet) {
                     IpV4Packet ipacket = packet.get(IpV4Packet.class);
                     String inpString = extractHexStream(packet.getRawData());
-                    System.out.println("Ein Paket \n\n"+inpString);
                    for(Rule x : ruleSet){
 
                         String pattern = x.getPattern();
