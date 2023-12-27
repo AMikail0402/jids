@@ -24,7 +24,7 @@ pipeline {
             steps {
                 script{
                  sh("sudo cp /test/rules.conf ./rules.conf")
-                 sh 'echo $(cat rules.conf)'
+                 sh 'cat rules.conf'
                 }
             }
         }
