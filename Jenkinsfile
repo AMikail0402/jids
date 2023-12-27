@@ -20,6 +20,15 @@ pipeline {
             }
         }
 
+        stage('Setup') {
+            steps {
+                script{
+                 sh("sudo cp /test/rules.conf ./rules.conf")
+                }
+            }
+        }
+
+
         stage('Deploy') {
             steps {
                 script{
