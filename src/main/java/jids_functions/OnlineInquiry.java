@@ -2,8 +2,11 @@ package jids_functions;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.function.Function;
+import java.util.stream.Stream;
 
 import org.pcap4j.core.NotOpenException;
 import org.pcap4j.core.PacketListener;
@@ -56,12 +59,14 @@ public class OnlineInquiry{
                 public void gotPacket(Packet packet) {
                     IpV4Packet ipacket = packet.get(IpV4Packet.class);
                     String inpString = extractHexStream(packet.getRawData());
-                   for(Rule x : ruleSet){
+                    
+                    Arrays.stream(ruleSet).forEach(x -> processRule(x, inpString, x.getPattern(), db, ipacket) );
+                   /*for(Rule x : ruleSet){
 
                         String pattern = x.getPattern();
                         threadingRegex(x, inpString, pattern, db, ipacket);
 
-                    }
+                    }*/
                     
                 }
                 
@@ -85,6 +90,22 @@ public class OnlineInquiry{
                 }
         
                 return hexStreamBuilder.toString();
+            }
+
+            static void processRule(Rule x, String input, String pattern, boolean db,IpV4Packet ipacket ){
+                 boolean keyword  = RegexSearch.search(input, pattern);
+                          if(keyword == true){
+
+                         System.out.println("Match!\n\n");
+                        if(db){
+                                try {
+                                    DbPush.push(x.getCve(), x.getMsg(),new Date().toString(), ipacket.getHeader().getSrcAddr().toString());
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                    System.out.println("Datenbank konnte nicht erreicht werden !");
+                                }
+                            }
+                        }
             }
 
             static void threadingRegex(Rule x, String input, String pattern, boolean db,IpV4Packet ipacket ){
