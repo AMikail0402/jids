@@ -25,11 +25,13 @@ public class DbCheck {
             Response response = client.newCall(request).execute();
             if(response.code() == 200){
                 System.out.println("Datenbankanbindung funktioniert !");
+                response.close();
                 DbPush.init();
                 return true;
             }
             else{
                 System.out.println("Datenbankanbindung funktioniert nicht !");
+                response.close();
                 return false;
             }
         } catch (ConnectException e) {

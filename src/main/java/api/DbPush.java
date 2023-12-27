@@ -27,5 +27,6 @@ public class DbPush {
           .build();
         
         Response response = staticClient.newCall(request).execute();
+        response.close();
     }
 }
