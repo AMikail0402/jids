@@ -61,12 +61,6 @@ public class OnlineInquiry{
                     String inpString = extractHexStream(packet.getRawData());
                     
                     Arrays.stream(ruleSet).forEach(x -> processRule(x, inpString, x.getPattern(), db, ipacket) );
-                   /*for(Rule x : ruleSet){
-
-                        String pattern = x.getPattern();
-                        threadingRegex(x, inpString, pattern, db, ipacket);
-
-                    }*/
                     
                 }
                 
