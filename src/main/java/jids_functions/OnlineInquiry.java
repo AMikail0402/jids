@@ -30,7 +30,7 @@ public class OnlineInquiry{
        public static void onlineAnalysis(BufferedReader br, boolean db,String address) throws PcapNativeException, NotOpenException, IOException{   
 
             System.setProperty("log4j.configurationFile","./resources/log4j2.xml");
-
+            
 
             PcapNetworkInterface device = getNetworkDevice(address);
             System.out.println("You chose: " + device);
@@ -56,6 +56,7 @@ public class OnlineInquiry{
                 public void gotPacket(Packet packet) {
                     IpV4Packet ipacket = packet.get(IpV4Packet.class);
                     String inpString = extractHexStream(packet.getRawData());
+                    System.out.println("Ein Paket \n\n"+inpString);
                    for(Rule x : ruleSet){
 
                         String pattern = x.getPattern();
